@@ -14,7 +14,7 @@ export const remoteDbConfig = {
     "port": ENV.REMOTE_DB_PORT,
     "username": ENV.REMOTE_DB_USER,
     "password": ENV.REMOTE_DB_PASSWORD,
-    "database": "accoms",
+    "database": "bookings",
     "entities": entityList,
     "synchronize": syncDB || false
 }
@@ -26,7 +26,7 @@ export const localDbConfig = {
     "port": ENV.LOCAL_DB_PORT,
     "username": ENV.LOCAL_DB_USER,
     "password": ENV.LOCAL_DB_PASSWORD,
-    "database": "accoms",
+    "database": "bookings",
     "entities": entityList,
     "synchronize": syncDB || false
 }
