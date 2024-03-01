@@ -1,9 +1,8 @@
 FROM node:lts-alpine
-WORKDIR /usr/src/app
+WORKDIR /Users/justinlee/Documents/GitHub/wherebnb/wherebnb-bookings
 COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
 RUN npm install
 COPY . .
 EXPOSE 3002
 RUN chown -R node /usr/src/app
-USER node
 CMD ["npm", "start"]
