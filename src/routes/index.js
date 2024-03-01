@@ -4,4 +4,4 @@ import { bookingsRoutes } from './bookings.routes.js';
 
 export const routes = express.Router();
 
-routes.use('/accoms', bookingsRoutes)
+routes.use('/booking', bookingsRoutes)

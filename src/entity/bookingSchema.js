@@ -15,10 +15,10 @@ export const BookingModel = new EntitySchema({
             type: "int"
         },
         startDate: {
-            type: "date"
+            type: "datetime"
         },
         endDate: {
-            type: "date"
+            type: "datetime"
         },
         guestId: {
             type: "int"

@@ -18,7 +18,6 @@ app.use('/', routes)
 const ENV = process.env
 const NODE_PORT = ENV.NODE_PORT || 3000;
 
-
 export const AppDataSource = new DataSource(ENV.USE_DB === "LOCAL" ? localDbConfig : remoteDbConfig)
 
 // stack tracing for debugging
