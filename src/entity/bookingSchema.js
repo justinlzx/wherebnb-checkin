@@ -15,10 +15,12 @@ export const BookingModel = new EntitySchema({
             type: "int"
         },
         startDate: {
-            type: "datetime"
+            type: "datetime",
+            default: () => "CURRENT_TIMESTAMP"
         },
         endDate: {
-            type: "datetime"
+            type: "datetime",
+            default: () => "CURRENT_TIMESTAMP"
         },
         guestId: {
             type: "int"

@@ -16,3 +16,18 @@ export const create = async (payload) => {
         throw `UploadError: ${error}`;
     }
 }
+
+export const getBookingsByListingId = async (id) => {
+    try {
+        const result = await AppDataSource.createQueryBuilder()
+            .select("booking")
+            .from(BookingModel, "booking")
+            .where("booking.listingId = :id", { id })
+            .getMany();
+
+        return result;
+    } catch (error) {
+        console.log(`${chalk.red('Error:')} ${error}`)
+        throw `UploadError: ${error}`;
+    }
+};
