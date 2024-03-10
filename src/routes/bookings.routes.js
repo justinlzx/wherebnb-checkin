@@ -1,6 +1,7 @@
 import express from 'express';
-import { createBooking } from '../controller/booking.controller.js';
+import { createBooking, getBooking } from '../controller/booking.controller.js';
 
 export const bookingsRoutes = express.Router();
 
 bookingsRoutes.post('/', createBooking)
+bookingsRoutes.get('/:id', getBooking)
