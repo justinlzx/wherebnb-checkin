@@ -32,6 +32,10 @@ export const BookingModel = new EntitySchema({
         updatedAt: {
             type: "timestamp",
             createDate: true,
+        },
+        checkedIn: {
+            type: "boolean",
+            default: false
         }
     }
 })
