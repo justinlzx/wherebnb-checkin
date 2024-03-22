@@ -1,7 +1,6 @@
 import express from 'express';
-import { createBooking, getBooking } from '../controller/booking.controller.js';
+import { setCheckinStatus } from '../controller/booking.controller.js';
 
-export const bookingsRoutes = express.Router();
+export const CheckinRoutes = express.Router();
 
-bookingsRoutes.post('/', createBooking)
-bookingsRoutes.get('/:id', getBooking)
+CheckinRoutes.post('/:id', setCheckinStatus)
