@@ -3,22 +3,22 @@ import axios from 'axios'
 
 export const setCheckinStatus = async (req, res) => {
     try {
-        const id = +req.query.id;
         const {
             guestEmail,
             guestName,
+            bookingId,
             hostId,
         } = req.body
 
-        await axios.put(`${process.env.BOOKINGS_URL}`, {
-            id,
+
+        const result = await axios.put(`${process.env.BOOKINGS_URL}/booking/${bookingId}`, {
             checkedIn: true,
         })
         .then(async (resp) => {
             console.log('Booking updated successfully')
 
             //TODO: connect to accounts repo 
-            const hostInfo = await axios.get(`${process.env.ACCOUNTS_URL}/${hostId}`)
+            // const hostInfo = await axios.get(`${process.env.ACCOUNTS_URL}/${hostId}`)
 
             // const payload = {
             //     emailType: "bookingConfirmation",
@@ -42,16 +42,22 @@ export const setCheckinStatus = async (req, res) => {
                 totalPrice: "400",
             }
 
-            await axios.post(`${process.env.NOTIFICATIONS_URL}`, payload)
-            .then(() => {
-                console.log('Notification sent successfully')
+            
+            await axios.post(`${process.env.NOTIFICATIONS_URL}/rabbit`, payload)
+            .then((resp) => {
+                console.log('Notification sent successfully', resp)
+
+            })
+            .catch((err) => {
+                console.log('ERROR:', err)
+                return err
             })
         })
 
         return Res.successResponse(res, result)
     }
     catch (error) {
+        console.log(error)
         return Res.errorResponse(res, error)
     }
-
 };
