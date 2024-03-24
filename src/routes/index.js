@@ -1,6 +1,6 @@
 import express from 'express';
-import { bookingsRoutes } from './bookings.routes.js';
+import { CheckinRoutes } from './bookings.routes.js';
 
 
 export const routes = express.Router();
-routes.use('/checkin', bookingsRoutes)
+routes.use('/checkin', CheckinRoutes)
