@@ -17,19 +17,6 @@ export const setCheckinStatus = async (req, res) => {
         .then(async (resp) => {
             console.log('Booking updated successfully')
 
-            //TODO: connect to accounts repo 
-            // const hostInfo = await axios.get(`${process.env.ACCOUNTS_URL}/${hostId}`)
-
-            // const payload = {
-            //     emailType: "bookingConfirmation",
-            //     travelerEmail: guestEmail,
-            //     travelerName: guestName,
-            //     hostEmail: hostInfo.data.email,
-            //     hostName: hostInfo.data.firstName,
-            //     bookingDates: "3 May",
-            //     totalPrice: "400",
-            // }
-
             const payload = {
                 emailType: "bookingConfirmation",
                 travelerEmail: guestEmail,
@@ -42,7 +29,6 @@ export const setCheckinStatus = async (req, res) => {
                 totalPrice: "400",
             }
 
-            
             await axios.post(`${process.env.NOTIFICATIONS_URL}/rabbit`, payload)
             .then((resp) => {
                 console.log('Notification sent successfully', resp)
