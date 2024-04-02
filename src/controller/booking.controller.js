@@ -7,7 +7,11 @@ export const setCheckinStatus = async (req, res) => {
             guestEmail,
             guestName,
             bookingId,
+            listingId,
+            propertyName,
             hostId,
+            startDate,
+            endDate
         } = req.body
 
 
@@ -17,22 +21,25 @@ export const setCheckinStatus = async (req, res) => {
         .then(async (resp) => {
             console.log('Booking updated successfully')
 
+            const hostInfo = await axios.get(`${process.env.ACCOUNTS_URL}/view/${hostId}`)
+
+            const checkInInstructions = await axios.get(`${process.env.ACCOMS_URL}/listings/instructions/${listingId}`)
+
             const payload = {
-                emailType: "bookingConfirmation",
+                emailType: "checkIn",
                 travelerEmail: guestEmail,
                 travelerName: guestName,
-                // hostEmail: hostInfo.data.email,
-                // hostName: hostInfo.data.firstName,
-                hostEmail: "zxlee.2022@scis.smu.edu.sg",
-                hostName: "Mary",
-                bookingDates: "3 May",
-                totalPrice: "400",
+                propertyName,
+                hostEmail: hostInfo.data.data.email,
+                hostName: hostInfo.data.data.firstName,
+                bookingStart: formatDate(startDate),
+                bookingEnd: formatDate(endDate),
+                instructions: checkInInstructions.data.data.instructions,
             }
 
             await axios.post(`${process.env.NOTIFICATIONS_URL}/rabbit`, payload)
             .then((resp) => {
-                console.log('Notification sent successfully', resp)
-
+                return 'Notification sent successfully'
             })
             .catch((err) => {
                 console.log('ERROR:', err)
@@ -47,3 +54,12 @@ export const setCheckinStatus = async (req, res) => {
         return Res.errorResponse(res, error)
     }
 };
+
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+
+    return `${day} ${month} ${year}`;
+}
