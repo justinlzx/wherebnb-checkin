@@ -34,12 +34,16 @@ export const setCheckinStatus = async (req, res) => {
                 hostName: hostInfo.data.data.firstName,
                 bookingStart: formatDate(startDate),
                 bookingEnd: formatDate(endDate),
-                instructions: checkInInstructions.data.data.instructions,
+                instructions: checkInInstructions.data.data.instructions
             }
 
             await axios.post(`${process.env.NOTIFICATIONS_URL}/rabbit`, payload)
             .then((resp) => {
-                return 'Notification sent successfully'
+                console.log('resp', resp)
+                return Res.successResponse(res, {
+                    message: 'Check-in successful',
+                    instructions: checkInInstructions.data.data.instructions
+                })
             })
             .catch((err) => {
                 console.log('ERROR:', err)
