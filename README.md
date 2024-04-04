@@ -1,6 +1,6 @@
 # wherebnb-checkin
 
-wherebnb-checkin is a simple microservice that manages the check-status for the wherebnb application. 
+wherebnb-checkin is a complex microservice that manages the check-status for the wherebnb application. 
 
 
 ## Setting up 
